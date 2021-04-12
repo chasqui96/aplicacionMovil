@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Views.Activity.LoginActivity"
+    android:orientation="vertical"
+    >
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="106dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/paciente" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:padding="15dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:text="MANTENER PACIENTE"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:layout_marginTop="15dp">
+
+                <EditText
+                    android:id="@+id/etNombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:hint="Nombre"
+                    android:textColorHint="@color/colorText"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:inputType="text"
+                    android:background="@drawable/campo_redondeado"/>
+
+                <EditText
+                    android:id="@+id/etApellido"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:hint="Apellido"
+                    android:textColorHint="@color/colorText"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:layout_marginTop="10dp"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/campo_redondeado"/>
+
+                <EditText
+                    android:id="@+id/etCi"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:hint="Cedula Identidad"
+                    android:textColorHint="@color/colorText"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:inputType="text"
+                    android:background="@drawable/campo_redondeado"/>
+
+                <EditText
+                    android:id="@+id/etFechaNa"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:hint="Fecha Nacimiento"
+                    android:textColorHint="@color/colorText"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:inputType="text"
+                    android:background="@drawable/campo_redondeado"/>
+
+                <EditText
+                    android:id="@+id/etTelefono"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:hint="Telefono"
+                    android:textColorHint="@color/colorText"
+                    android:padding="8dp"
+                    android:textSize="16sp"
+                    android:inputType="phone"
+                    android:background="@drawable/campo_redondeado"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingTop="0dp"
+                android:paddingRight="20dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:id="@+id/acdLLAgregar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+
+                        <Button
+                            android:id="@+id/btnPaciente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_style"
+                            android:padding="5dp"
+                            android:text="CREAR PACIENTE"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp" />
+
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:id="@+id/acdLLModificar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/btnEditarPaciente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_style"
+                            android:padding="5dp"
+                            android:text="EDITAR PACIENTE"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/btnEliminarPaciente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/button_eliminar_style"
+                            android:padding="5dp"
+                            android:text="ELIMINAR"
+                            android:textAlignment="center"
+                            android:textColor="@color/colorWhite"
+                            android:textSize="16sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:paddingTop="28dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:gravity="center"
+                >
+
+
+
+                <TextView
+                    android:id="@+id/tvIrLista"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorText"
+                    android:textStyle="bold"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:text="Ir a Lista"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:layout_marginLeft="10dp"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

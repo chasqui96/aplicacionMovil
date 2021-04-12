@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_paciente"
+            android:icon="@drawable/ic_cursos"
+            android:title="Pacientes" />
+        <item
+            android:id="@+id/nav_especialidad"
+            android:icon="@drawable/usuarionuevo"
+            android:title="Especialidad" />
+        <item
+            android:id="@+id/nav_cupos"
+            android:icon="@drawable/ic_categorias"
+            android:title="Cupos" />
+        <item
+            android:id="@+id/nav_historial"
+            android:icon="@drawable/ic_categorias"
+            android:title="Historial Cupos" />
+        <item
+            android:id="@+id/nav_historial_reserva"
+            android:icon="@drawable/ic_categorias"
+            android:title="Historial reserva" />
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_usuarios"
+                android:icon="@drawable/ic_categorias"
+                android:title="Usuarios" />
+            <item
+                android:id="@+id/nav_usuario"
+                android:icon="@drawable/ic_usuario"
+                android:title="Mi usuario" />
+            <item
+                android:id="@+id/cerrar_sesion"
+                android:icon="@drawable/ic_cerrar_sesion"
+                android:title="Cerrar sesión" />
+        </menu>
+    </item>
+
+</menu>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.CardView
+        card_view:cardCornerRadius="2dp"
+        card_view:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="5dp"
+        >
+
+        <LinearLayout
+            android:layout_width="379dp"
+            android:layout_height="170dp"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+
+            <LinearLayout
+                android:id="@+id/ripLLItemSeleccionado"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="306dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="269dp"
+                        android:layout_height="wrap_content">
+
+
+                        <ImageView
+                            android:id="@+id/rictvinactivo"
+                            android:layout_width="39dp"
+                            android:layout_height="37dp"
+                            card_view:srcCompat="@drawable/inactivo" />
+
+                        <TextView
+                            android:id="@+id/idDoctor"
+                            android:layout_width="192dp"
+                            android:layout_height="match_parent"
+                            android:text="@string/DoctorT"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/idDia"
+                            android:layout_width="94dp"
+                            android:layout_height="match_parent"
+                            android:text="@string/DiaT"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/idEspecialidad"
+                            android:layout_width="182dp"
+                            android:layout_height="match_parent"
+                            android:text="@string/EspecialidadTitulo"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="289dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="113dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.60"
+                            android:gravity="center"
+                            android:text="@string/cantidadReservado" />
+
+                        <TextView
+                            android:layout_width="183dp"
+                            android:layout_height="20dp"
+                            android:layout_weight="0.60"
+                            android:gravity="center"
+                            android:text="@string/Reservados" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/cupoDisponible"
+                            android:layout_width="90dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60"
+                            android:gravity="center"
+                            android:text="@string/cupoDisponible" />
+
+                        <TextView
+                            android:id="@+id/cupoReservado"
+                            android:layout_width="178dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60"
+                            android:gravity="center"
+                            android:text="@string/cupoReservado" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60"
+                            android:gravity="center"
+                            android:text="@string/H_Desdes" />
+
+                        <TextView
+                            android:layout_width="141dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60"
+                            android:gravity="center"
+                            android:text="@string/H_Hasta" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/desde"
+                            android:layout_width="93dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60"
+                            android:gravity="center"
+                            android:text="@string/Desde" />
+
+                        <TextView
+                            android:id="@+id/hasta"
+                            android:layout_width="156dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60"
+                            android:gravity="center"
+                            android:text="@string/Hasta" />
+                    </LinearLayout>
+
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/idEsoer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.40"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/idDoctorr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.40"
+                android:gravity="center" />
+
+            <TextView
+                android:id="@+id/IdPersonalS"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.40"
+                android:gravity="center" />
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/rivCivImagen"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/list" />
+
+
+        </LinearLayout>
+
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+
+

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/tools">
+
+    <android.support.v7.widget.CardView
+        card_view:cardCornerRadius="2dp"
+        card_view:cardUseCompatPadding="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="5dp"
+        >
+
+        <LinearLayout
+            android:layout_width="328dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+
+            <ImageView
+                android:id="@+id/imgItem"
+                android:layout_width="85dp"
+                android:layout_height="83dp"
+                android:layout_marginRight="10dp"
+                android:background="#FFFFFF"
+                android:scaleType="centerCrop"
+                android:src="@drawable/especialidad" />
+
+            <LinearLayout
+                android:layout_width="177dp"
+                android:layout_height="61dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/rictvTitulo"
+                    android:layout_width="180dp"
+                    android:layout_height="wrap_content"
+                    android:text="DATOS ESPECIALIDAD"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/rictvNombre"
+                    android:layout_width="184dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="nombre"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/rictvestado"
+            android:layout_width="39dp"
+            android:layout_height="37dp"
+            card_view:srcCompat="@drawable/activo" />
+
+        <ImageView
+            android:id="@+id/rictvinactivo"
+            android:layout_width="39dp"
+            android:layout_height="37dp"
+            card_view:srcCompat="@drawable/inactivo" />
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
+
+

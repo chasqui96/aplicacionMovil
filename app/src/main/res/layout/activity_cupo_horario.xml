@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Views.Activity.IndexEspecialidadActivity"
+    >
+
+    <android.support.v7.widget.CardView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginTop="10dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="5dp"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <EditText
+                        android:id="@+id/acEtFecha"
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/campo_redondeado"
+                        android:entries="@array/dias_semanas"
+                        android:hint="Fecha"
+                        android:padding="10dp" />
+
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <Spinner
+                        android:id="@+id/acEtDia"
+                        android:layout_width="141dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/campo_redondeado"
+                        android:entries="@array/dias_semanas"
+                        android:hint="Dias"
+                        android:padding="10dp" />
+
+                    <EditText
+                        android:id="@+id/acEtReDoctor"
+                        android:layout_width="156dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="0dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/campo_redondeado"
+                        android:hint="Dr Registro."
+                        android:padding="10dp" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <Spinner
+                        android:id="@+id/acEtDoctor"
+                        android:layout_width="308dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@drawable/campo_redondeado"
+                        android:hint="Doctor"
+                        android:padding="10dp" />
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <EditText
+                        android:id="@+id/acEtDesde"
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/campo_redondeado"
+                        android:hint="H. Desde"
+                        android:timePickerMode="spinner"
+                        android:layout_weight="1"
+                        android:layout_centerHorizontal="true"
+                        android:padding="5dp" />
+
+
+                    <EditText
+                        android:id="@+id/acEthasta"
+                        android:layout_width="170dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/campo_redondeado"
+                        android:hint="H. Hasta"
+                        android:padding="10dp" />
+
+
+                </LinearLayout>
+
+
+                <android.support.v7.widget.CardView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    app:cardUseCompatPadding="true"
+                    app:cardElevation="10dp"
+                    app:cardCornerRadius="5dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="328dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:layout_margin="10dp"
+                            android:src="@drawable/list"
+                            android:id="@+id/rivCivImagen"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+
+                            <LinearLayout
+                                android:weightSum="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/etEspecialidad"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="0.9"
+                                    android:text="@string/nombre_especialidad"
+                                    android:textSize="20sp" />
+                                <EditText
+                                    android:id="@+id/IdEspecialidad"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="" />
+                                <EditText
+                                    android:id="@+id/IdPersonal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="" />
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="121dp"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:text="@string/cantidad" />
+
+
+
+                            </LinearLayout>
+                            <LinearLayout
+                                android:layout_weight="1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <EditText
+                                    android:id="@+id/etCantidad"
+                                    android:layout_width="121dp"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center"
+                                    android:inputType="number"
+                                    android:text="@string/cantidad_item" />
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </android.support.v7.widget.CardView>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <Button
+                        android:id="@+id/acFabCupo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_style"
+                        android:padding="5dp"
+                        android:text="Guardar Cupos"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="16sp" />
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+
+
+
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView
+        >
+</LinearLayout>
