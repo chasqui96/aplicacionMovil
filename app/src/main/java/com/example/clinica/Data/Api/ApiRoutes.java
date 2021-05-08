@@ -2,6 +2,7 @@ package com.example.clinica.Data.Api;
 
 import com.example.clinica.Data.Model.Categoria;
 import com.example.clinica.Data.Model.Curso;
+import com.example.clinica.Data.Model.Especialidad;
 import com.example.clinica.Data.Model.LoginBody;
 import com.example.clinica.Data.Model.Paciente;
 import com.example.clinica.Data.Model.Personal;
@@ -21,19 +22,54 @@ public interface ApiRoutes {
   @POST("loguear")
   Call<Personal> login(@Body LoginBody loginBody);
 
+  //RUTAS DE CRUD PERSONALES
   @POST("GuardarPersonales")
   Call<Personal> registrar(@Body Personal personal);
 
   @POST("EditarPersonales/editar")
   Call<Personal> editarPersonal(@Body Personal personal);
 
+  @POST("CambiarEstadoPersonales")
+  Call<Personal> cambiarEstadoPersonal(@Body Personal personal);
+  ////FIN RUTAS CRUD PERSONALES
 
-  @POST("guardarPacientes")
-  Call<Paciente> registrar(@Body Paciente paciente);
 
+  //RUTAS DE CRUD PACIENTES
+  @POST("GuardarPacientes")
+  Call<Paciente> registrarPacientes(@Body Paciente paciente);
+
+  @POST("EditarPacientes/editar")
+  Call<Paciente> editarPacientes(@Body Paciente paciente);
+
+  @POST("CambiarEstadoPacientes")
+  Call<Paciente> cambiarEstadoPacientes(@Body Paciente paciente);
+  ////FIN RUTAS CRUD PACIENTES
+
+
+  //RUTAS DE CRUD ESPECIALIDAD
+  @POST("GuardarEspe")
+  Call<Especialidad> registrarEspecialidad(@Body Especialidad especialidad);
+
+  @POST("EditarEspe/editar")
+  Call<Especialidad> editarEspecialidad(@Body Especialidad especialidad);
+
+  @POST("EliminarEspe/eliminar")
+  Call<Especialidad> eliminarEspecialidad(@Body Especialidad especialidad);
+  ////FIN RUTAS CRUD  ESPECIALIDAD
+
+
+
+  //RUTAS LISTA DE INDEX
   @GET("ListarPersonales")
   Call<List<Personal>> getPersonal();
 
+  @GET("Listar")
+  Call<List<Especialidad>> getEspecialidad();
+
+  @GET("ListarPacientes")
+  Call<List<Paciente>> getPacientes();
+
+  //FIN RUTAS LISTA DE INDEX
 
   @GET("cursos")
   Call<List<Curso>> getCursos();

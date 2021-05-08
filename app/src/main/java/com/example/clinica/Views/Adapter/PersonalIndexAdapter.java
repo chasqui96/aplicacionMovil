@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.clinica.Data.Model.Personal;
 import com.example.clinica.Data.Model.Profesor;
@@ -47,6 +48,7 @@ public class PersonalIndexAdapter extends RecyclerView.Adapter<PersonalIndexAdap
 
     class ViewHolderPersonal extends RecyclerView.ViewHolder{
         TextView nombres,apellidos,ci,password,username,spn,id;
+        ImageView activo,inactivo;
         ///ImageView d, tel, mail;
         public ViewHolderPersonal(View itemView) {
             super(itemView);
@@ -56,18 +58,26 @@ public class PersonalIndexAdapter extends RecyclerView.Adapter<PersonalIndexAdap
             ci = itemView.findViewById(R.id.rictvCi);
             username = itemView.findViewById(R.id.rictvTitulo);
             spn = itemView.findViewById(R.id.rictvTipo);
+            activo = itemView.findViewById(R.id.rictvestado);
+            inactivo=  itemView.findViewById(R.id.rictvinactivo);
         }
 
         void bind(final Personal personal, final OnItemClickListener itemClickListener){
-            Log.d("acaes",personal.getPer_id()+"");
-            id.setId(    personal.getPer_id());
+            id.setId(personal.getPer_id());
             nombres.setText(personal.getPer_nombre());
             apellidos.setText(personal.getPer_apellido());
             ci.setText(personal.getPer_ci());
-           // password.setText(personal.getPer_password());
             username.setText(personal.getPer_username()) ;
             spn.setText(personal.getPer_tipo());
-
+            if(personal.getPer_estado().equals("ACTIVO")){
+                Log.d("anteSSSSs","ACTIVO");
+                activo.setVisibility(View.VISIBLE);
+                inactivo.setVisibility(View.INVISIBLE);
+            }else{
+                Log.d("despues","INACTIVO");
+                activo.setVisibility(View.INVISIBLE);
+                inactivo.setVisibility(View.VISIBLE);
+            }
             //id.setVisibility(!personal.getPer_id().isEmpty  () ? View.VISIBLE : View.INVISIBLE);
             apellidos.setVisibility(personal.getPer_apellido().isEmpty() ? View.INVISIBLE : View.VISIBLE);
             ci.setVisibility(personal.getPer_ci().isEmpty() ? View.INVISIBLE : View.VISIBLE);

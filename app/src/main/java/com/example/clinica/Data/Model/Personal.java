@@ -16,6 +16,7 @@ public class Personal implements Serializable  {
     private String user;
     private String password;
     private String tipo_persona;
+    private String per_estado;
 
 
 
@@ -83,6 +84,13 @@ public class Personal implements Serializable  {
         this. per_telefono =  per_telefono;
     }
 
+    public String getPer_estado() {
+        return per_estado;
+    }
+
+    public void setPer_estado(String  per_estado) {
+        this. per_estado =  per_estado;
+    }
 
 }
 

@@ -202,7 +202,7 @@
                             android:layout_weight="1"
                             android:background="@drawable/button_eliminar_style"
                             android:padding="5dp"
-                            android:text="ELIMINAR"
+                            android:text="ACTIVAR"
                             android:textAlignment="center"
                             android:textColor="@color/colorWhite"
                             android:textSize="16sp" />

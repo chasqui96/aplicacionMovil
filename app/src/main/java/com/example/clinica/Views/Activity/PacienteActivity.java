@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
@@ -38,7 +39,6 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.Optional;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,6 +70,17 @@ public class PacienteActivity extends AppCompatActivity {
     @BindView(R.id.acdLLModificar)
     LinearLayout modificar;
 
+    @BindView(R.id.btnPaciente)
+    Button btnRegistrar;
+
+    @BindView(R.id.btnEliminarPaciente)
+    Button btnCambiarEstado;
+
+
+    @BindView(R.id.btnEditarPaciente)
+    Button btnEditarRegistrar;
+
+
     Boolean bNuevo = true , bModificado = false ;
 
     Paciente paciente;
@@ -100,25 +111,28 @@ public class PacienteActivity extends AppCompatActivity {
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
         //pantalla completa
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN , WindowManager.LayoutParams.FLAG_FULLSCREEN );
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //boton de retorno en el toolbar
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mensaje = new Mensaje(getApplicationContext());
 
-        if (getIntent().hasExtra("bNuevo")){
+        if (getIntent().hasExtra("bNuevo")) {
             bNuevo = getIntent().getBooleanExtra("bNuevo", true);
         }
 
         agregar.setVisibility(bNuevo ? View.VISIBLE : View.INVISIBLE);
         modificar.setVisibility(!bNuevo ? View.VISIBLE : View.INVISIBLE);
 
-        if (!bNuevo){
+        if (!bNuevo) {
             paciente = (Paciente) getIntent().getSerializableExtra("itemPaciente");
             cargarVista(paciente);
-        }
+            if (paciente.getPaciente_estado().equals("ACTIVO")) {
+                btnCambiarEstado.setText("INACTIVAR");
 
+            }
+        }
 
 
         fechana.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +145,68 @@ public class PacienteActivity extends AppCompatActivity {
         nombre.requestFocus();
 
 
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pdDialogo = ProgressDialog.show(PacienteActivity.this, "Creando paciente", "Comprobando datos...", true, false);
+                if (validar()) {
+                    Paciente _objPaciente = new Paciente();
+                    _objPaciente.setPaciente_nombre(nombre.getText().toString());
+                    _objPaciente.setPaciente_apellido(apellido.getText().toString());
+                    _objPaciente.setPaciente_ci(ci.getText().toString());
+                    _objPaciente.setPaciente_telefono(telefono.getText().toString());
+                    _objPaciente.setPaciente_fechana(fechana.getText().toString());
+                    registrar(_objPaciente);
+                } else {
+                    pdDialogo.dismiss();
+                }
+            }
+        });
+
+        btnEditarRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pdDialogo = ProgressDialog.show(PacienteActivity.this, "Editando paciente", "Comprobando datos...", true, false);
+                if (validar()) {
+                    Paciente _objPaciente = new Paciente();
+                    _objPaciente.setPaciente_id(paciente.getPaciente_id());
+                    _objPaciente.setPaciente_nombre(nombre.getText().toString());
+                    _objPaciente.setPaciente_apellido(apellido.getText().toString());
+                    _objPaciente.setPaciente_ci(ci.getText().toString());
+                    _objPaciente.setPaciente_telefono(telefono.getText().toString());
+                    _objPaciente.setPaciente_fechana(fechana.getText().toString());
+                    editarRegistro(_objPaciente);
+                } else {
+                    pdDialogo.dismiss();
+                }
+            }
+        });
+
+        btnCambiarEstado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(PacienteActivity.this)
+                        .setTitle("Cambiar Estado")
+                        .setMessage("¿Desea realizar la Operacion?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Paciente _objPaciente = new Paciente();
+                                _objPaciente.setPaciente_id(paciente.getPaciente_id());
+                                if(paciente.getPaciente_estado().equals("ACTIVO")){
+                                    _objPaciente.setPaciente_estado("INACTIVO");
+
+                                }else{
+                                    _objPaciente.setPaciente_estado("ACTIVO");
+                                }
+                                cambiarEstado(_objPaciente);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
+            }
+        });
     }
 
 
@@ -159,7 +235,7 @@ public class PacienteActivity extends AppCompatActivity {
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case DATE_ID:
-                return new DatePickerDialog(this, mDateSetListener, sYearIni, sMonthIni, sDayIni);
+                return new DatePickerDialog(PacienteActivity.this, mDateSetListener, sYearIni, sMonthIni, sDayIni);
 
 
         }
@@ -167,71 +243,83 @@ public class PacienteActivity extends AppCompatActivity {
 
         return null;
     }
-
-
-    @OnClick(R.id.btnPaciente)
-    void clickAgregar(){
-        pdDialogo = ProgressDialog.show(PacienteActivity.this,"Creando cuenta","Comprobando datos...",true,false);
-        if(validar()){
-            int codigo = SessionPreferences.get(getApplicationContext()).getPaciente();
-
-
-
-            bModificado = true;
-            toast("Paciente registrado");
-            //Intent intent = new Intent(PacienteActivity.this,IndexPacienteActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-           // startActivity(intent);
-            salirActivity();
-        }else{
-            toast("Paciente no se pudo registrar");
-            pdDialogo.dismiss();
-        }
-
-
-    }
-
-
-    @Optional
-    @OnClick(R.id.btnEditarPaciente)
-    void clickModificar(){
-        // pdDialogo = ProgressDialog.show(RegistroActivity.this,"Creando cuenta","Comprobando datos...",true,false);
-        if(validar()){
-
-
-            bModificado = true;
-            toast("Usuario Editado");
-            //Intent intent = new Intent(PacienteActivity.this,IndexPacienteActivity.class);
-           // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            //startActivity(intent);
-            salirActivity();
-        }else{
-            toast("Usuario no se pudo Editar");
-            pdDialogo.dismiss();
-        }
-
-
-    }
-
-    @OnClick(R.id.btnEliminarPaciente)
-    void clickEliminar(){
-
-        new AlertDialog.Builder(this)
-                .setTitle("Paciente")
-                .setMessage("¿Desea eliminar Pacinete?")
-                .setIcon(android.R.drawable.ic_dialog_alert)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+    private void editarRegistro(Paciente paciente){
+                Call<Paciente> callRegistro = Api.getApi().registrarPacientes(paciente);
+                callRegistro.enqueue(new Callback<Paciente>() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                      //  Delete.eliminar(getApplicationContext(), paciente.getPaciente_id(),PacienteTabla.TABLA);
-                        bModificado = true;
-                        mensaje.mensajeToasEliminar();
-                        salirActivity();
-                    }
-                })
-                .setNegativeButton(android.R.string.no, null).show();
+                    public void onResponse(Call<Paciente> call, Response<Paciente> response) {
+                        pdDialogo.dismiss();
+                        Log.d("este ess",response+"");
+                        if(response.isSuccessful()){
+                            toast("Registro guardado");
 
+                            Intent intent = new Intent(PacienteActivity.this,IndexPacienteActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }else{
+                            toast("No se ha podido registrar tu cuenta");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Paciente> call, Throwable t) {
+                        pdDialogo.dismiss();
+                        toast("Error al comunicarse con el servidor");
+                    }
+                });
     }
+
+    private void registrar(Paciente paciente){
+        Call<Paciente> callRegistro = Api.getApi().registrarPacientes(paciente);
+        callRegistro.enqueue(new Callback<Paciente>() {
+            @Override
+            public void onResponse(Call<Paciente> call, Response<Paciente> response) {
+                pdDialogo.dismiss();
+                Log.d("este ess",response+"");
+                if(response.isSuccessful()){
+                    toast("Registro guardado");
+
+                    Intent intent = new Intent(PacienteActivity.this,IndexPacienteActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }else{
+                    toast("No se ha podido registrar tu cuenta");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Paciente> call, Throwable t) {
+                pdDialogo.dismiss();
+                toast("Error al comunicarse con el servidor");
+            }
+        });
+    }
+
+    private void cambiarEstado(Paciente paciente) {
+        Call<Paciente> callPaciente= Api.getApi().cambiarEstadoPacientes(paciente);
+        callPaciente.enqueue(new Callback<Paciente>() {
+            @Override
+            public void onResponse(Call<Paciente> call, Response<Paciente> response) {
+
+                Log.d("este si", response + "");
+                if (response.isSuccessful()) {
+                    bModificado = true;
+                    toast("Se realizo un Cambio de estado");
+                    salirActivity();
+                } else {
+                    toast("No se ha podido cambiar de estado");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Paciente> call, Throwable t) {
+                pdDialogo.dismiss();
+                toast("Error al comunicarse con el servidor");
+            }
+        });
+    }
+
+
 
     private boolean validar(){
         boolean valido = true;
@@ -271,32 +359,6 @@ public class PacienteActivity extends AppCompatActivity {
         return pattern.matcher(email).matches();
     }
 
-    //private void registro(Personal personal){--?
-    //Call<Personal> callRegistro = Api.getApi().registrar(personal);
-    //callRegistro.enqueue(new Callback<Personal>() {
-    // @Override
-    //  public void onResponse(Call<Personal> call, Response<Personal> response) {
-    //pdDialogo.dismiss();
-    //  if(response.isSuccessful()){
-    //  toast("Usuario registrado");
-    //  prefs.guardarUsuario(response.body());
-
-    //Intent intent = new Intent(RegistroActivity.this,PrincipalActivity.class);
-    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-    /// startActivity(intent);
-    //}else{
-    //  toast("No se ha podido registrar tu cuenta");
-    // }
-    //}
-
-    // @Override
-    //public void onFailure(Call<Personal> call, Throwable t) {
-    //  pdDialogo.dismiss();
-    // toast("Error al comunicarse con el servidor");
-    //  }
-    //  });
-    //}
-
 
     private void cargarVista(Paciente paciente) {
 
@@ -309,32 +371,32 @@ public class PacienteActivity extends AppCompatActivity {
 
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
+            @Override
+            public boolean onOptionsItemSelected(MenuItem item) {
+                switch (item.getItemId()) {
+                    case android.R.id.home:
+                        salirActivity();
+                        return true;
+                    default:
+                        return super.onOptionsItemSelected(item);
+                }
+            }
+
+            @Override
+            public void onBackPressed() {
                 salirActivity();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+            }
 
-    @Override
-    public void onBackPressed() {
-        salirActivity();
-    }
+            void salirActivity(){
+                if (bModificado){
+                    setResult(Activity.RESULT_OK, new Intent());
+                }
+                finish();
+            }
 
-    void salirActivity(){
-        if (bModificado){
-            setResult(Activity.RESULT_OK, new Intent());
-        }
-        finish();
-    }
-
-    private void toast(String mensaje){
-        Toast.makeText(getApplicationContext(),mensaje,Toast.LENGTH_LONG).show();
-    }
+            private void toast(String mensaje){
+                Toast.makeText(getApplicationContext(),mensaje,Toast.LENGTH_LONG).show();
+            }
 
 
 }

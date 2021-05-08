@@ -71,6 +71,10 @@ public class RegistroActivity extends AppCompatActivity   {
     @BindView(R.id.btnRegistrarse)
     Button btnRegistrar;
 
+    @BindView(R.id.btnEliminarRegistrar)
+    Button btnCambiarEstado;
+
+
     @BindView(R.id.btnEditarRegistrarse)
     Button btnEditarRegistrar;
 
@@ -112,6 +116,10 @@ public class RegistroActivity extends AppCompatActivity   {
         if (!bNuevo){
             personal = (Personal)getIntent().getSerializableExtra("itemPersonal");
             cargarVista(personal);
+            if(personal.getPer_estado().equals("ACTIVO")){
+                btnCambiarEstado.setText("INACTIVAR");
+
+            }
         }
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -169,6 +177,34 @@ public class RegistroActivity extends AppCompatActivity   {
             }
         });
 
+
+
+        btnCambiarEstado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(RegistroActivity.this)
+                        .setTitle("Personal")
+                        .setMessage("¿Desea realizar la Operacion?")
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.d("editar",personal.getPer_ci()+"");
+                                Personal _objPersonal= new Personal();
+                                _objPersonal.setPer_id(personal.getPer_id());
+                                if(personal.getPer_estado().equals("ACTIVO")){
+                                    _objPersonal.setPer_estado("INACTIVO");
+
+                                }else{
+                                    _objPersonal.setPer_estado("ACTIVO");
+                                }
+                                cambiarEstado(_objPersonal);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, null).show();
+            }
+        });
+
     }
 
     private void registro(Personal personal){
@@ -212,6 +248,32 @@ public class RegistroActivity extends AppCompatActivity   {
                     salirActivity();
                 }else{
                     toast("No se ha podido registrar tu cuenta");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Personal> call, Throwable t) {
+                pdDialogo.dismiss();
+                toast("Error al comunicarse con el servidor");
+            }
+        });
+
+
+    }
+
+    private void cambiarEstado(Personal personal) {
+        Call<Personal> callRegistro = Api.getApi().cambiarEstadoPersonal(personal);
+        callRegistro.enqueue(new Callback<Personal>() {
+            @Override
+            public void onResponse(Call<Personal> call, Response<Personal> response) {
+
+                Log.d("este si", response + "");
+                if (response.isSuccessful()) {
+                    bModificado = true;
+                    toast("Se realizo un Cambio de estado");
+                    salirActivity();
+                } else {
+                    toast("No se ha podido cambiar de estado");
                 }
             }
 

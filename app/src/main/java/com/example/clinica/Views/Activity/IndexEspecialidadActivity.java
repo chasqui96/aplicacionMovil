@@ -12,12 +12,17 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
+import com.example.clinica.Data.Api.Api;
 import com.example.clinica.Data.Model.Especialidad;
+import com.example.clinica.Data.Model.Paciente;
 import com.example.clinica.R;
 import com.example.clinica.Views.Adapter.EspecialidadIndexAdapter;
+import com.example.clinica.Views.Adapter.PacienteIndexAdapter;
 
 
 import java.util.ArrayList;
@@ -26,6 +31,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class IndexEspecialidadActivity extends AppCompatActivity {
     @BindView(R.id.acRvEspecialidad)
@@ -40,7 +48,8 @@ public class IndexEspecialidadActivity extends AppCompatActivity {
     EspecialidadIndexAdapter adaptador;
     Boolean bNuevo = true , bModificado = false ;
     //lista de objetos
-    List<Especialidad> listaEspecialidad = new ArrayList<>();
+    List<Especialidad>  listaEspecialidad = new ArrayList<>();
+    private ProgressBar pbCarga;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,23 +61,9 @@ public class IndexEspecialidadActivity extends AppCompatActivity {
 
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         layoutManager = new LinearLayoutManager(getApplicationContext());
-        cargarLista();
-        buscador.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        pbCarga = findViewById(R.id.pbCarga);
+        cargarRecycler();
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                cargarLista();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
     }
     @OnClick(R.id.acFabNuevoEspecialidad)
     public void clickNuevoEspecialidad(){
@@ -77,26 +72,35 @@ public class IndexEspecialidadActivity extends AppCompatActivity {
     }
 
 
-    private void cargarLista() {
-        cargarRecycler(listaEspecialidad);
-    }
 
-    private void cargarRecycler(List<Especialidad> listaEspecialidad) {
 
-        adaptador = new EspecialidadIndexAdapter(listaEspecialidad, new EspecialidadIndexAdapter.OnItemClickListener(){
+    private void cargarRecycler() {
+        Call<List<Especialidad>> callEspecialidad= Api.getApi().getEspecialidad();
+        callEspecialidad.enqueue(new Callback<List<Especialidad>>() {
             @Override
-            public void onItemClick(Especialidad especialidad, int position) {
-                irActivity(false, especialidad);
+            public void onResponse(Call<List<Especialidad>> call, Response<List<Especialidad>> response) {
+                Log.d("acaes",response.body()+"");
+                listaEspecialidad = response.body();
+                pbCarga.setVisibility(View.GONE);
+                adaptador = new EspecialidadIndexAdapter(listaEspecialidad, new EspecialidadIndexAdapter.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(Especialidad especialidad, int position) {
+                        irActivity(false, especialidad);
+                    }
+                });
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setItemAnimator(new DefaultItemAnimator());
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(adaptador);
+
+                adaptador.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Especialidad>> call, Throwable t) {
+
             }
         });
-
-        recyclerView.setHasFixedSize(true);
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView.setLayoutManager(layoutManager);
-
-        recyclerView.setAdapter(adaptador);
 
     }
 
@@ -135,7 +139,7 @@ public class IndexEspecialidadActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK){
-            cargarLista();
+            cargarRecycler();
         }
     }
 

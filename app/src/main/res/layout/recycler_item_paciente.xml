@@ -88,6 +88,12 @@
             android:layout_height="37dp"
             card_view:srcCompat="@drawable/activo" />
 
+        <ImageView
+            android:id="@+id/rictvinactivo"
+            android:layout_width="39dp"
+            android:layout_height="34dp"
+            card_view:srcCompat="@drawable/inactivo" />
+
 
     </android.support.v7.widget.CardView>
 

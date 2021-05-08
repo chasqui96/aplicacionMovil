@@ -2,9 +2,11 @@ package com.example.clinica.Views.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.clinica.Data.Model.Paciente;
@@ -47,24 +49,32 @@ public class PacienteIndexAdapter extends RecyclerView.Adapter<PacienteIndexAdap
 
     class ViewHolderPaciente extends RecyclerView.ViewHolder{
         TextView nombres,apellidos,ci,fechana;
-        ///ImageView d, tel, mail;
+        ImageView activo,inactivo;
         public ViewHolderPaciente(View itemView) {
             super(itemView);
 
             nombres = itemView.findViewById(R.id.rictvNombre);
             apellidos = itemView.findViewById(R.id.rictvApellido);
             ci = itemView.findViewById(R.id.rictvCi);
-            //username = itemView.findViewById(R.id.rictvTitulo);
             fechana = itemView.findViewById(R.id.rictvFechana);
-            //password = itemView.findViewById(R.id.rictvCi);
+            activo = itemView.findViewById(R.id.rictvestado);
+            inactivo=  itemView.findViewById(R.id.rictvinactivo);
         }
 
         void bind(final Paciente paciente, final PacienteIndexAdapter.OnItemClickListener itemClickListener){
-
+            Log.d("payaso",paciente.getPaciente_fechana()+"");
             nombres.setText(paciente.getPaciente_nombre());
             apellidos.setText(paciente.getPaciente_apellido());
             ci.setText(paciente.getPaciente_ci());
-            //password.setText(personal.getPer_password());
+            if(paciente.getPaciente_estado().equals("ACTIVO")){
+                Log.d("anteSSSSs","ACTIVO");
+                activo.setVisibility(View.VISIBLE);
+                inactivo.setVisibility(View.INVISIBLE);
+            }else{
+                activo.setVisibility(View.INVISIBLE);
+                inactivo.setVisibility(View.VISIBLE);
+            }
+
             fechana.setText(paciente.getPaciente_fechana()) ;
 
 

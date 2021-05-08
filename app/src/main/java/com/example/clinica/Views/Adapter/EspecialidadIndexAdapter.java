@@ -50,34 +50,23 @@ public class EspecialidadIndexAdapter extends RecyclerView.Adapter<EspecialidadI
 
     class ViewHolderEspecialidad extends RecyclerView.ViewHolder{
         TextView descripcion;
-        ImageView activo,inactivo;
-        ///ImageView d, tel, mail;
+        //ImageView activo,inactivo;
+
         public ViewHolderEspecialidad(View itemView) {
             super(itemView);
 
             descripcion= itemView.findViewById(R.id.rictvNombre);
-             activo = itemView.findViewById(R.id.rictvestado);
-             inactivo=  itemView.findViewById(R.id.rictvinactivo);
+            // activo = itemView.findViewById(R.id.rictvestado);
+             //inactivo=  itemView.findViewById(R.id.rictvinactivo);
 
         }
 
         void bind(final Especialidad especialidad, final EspecialidadIndexAdapter.OnItemClickListener itemClickListener){
 
             descripcion.setText(especialidad.getEspecialidad_descripcion());
-            Log.d("antes",especialidad.getEspecialidad_estado());
-            if(especialidad.getEspecialidad_estado().equals("ACTIVO")){
-                Log.d("anteSSSSs","ACTIVO");
-                activo.setVisibility(View.VISIBLE);
-                inactivo.setVisibility(View.INVISIBLE);
-            }else{
-                Log.d("despues","INACTIVO");
-                activo.setVisibility(View.INVISIBLE);
-                inactivo.setVisibility(View.VISIBLE);
-            }
+
 
             descripcion.setVisibility(especialidad.getEspecialidad_descripcion().isEmpty() ? View.INVISIBLE : View.VISIBLE);
-            //estado.setVisibility(especialidad.getEspecialidad_estado().isEmpty() ? View.INVISIBLE : View.VISIBLE);
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

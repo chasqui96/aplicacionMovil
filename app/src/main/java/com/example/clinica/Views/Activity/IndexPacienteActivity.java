@@ -10,15 +10,20 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
+import com.example.clinica.Data.Api.Api;
 import com.example.clinica.Data.Model.Paciente;
 
+import com.example.clinica.Data.Model.Personal;
 import com.example.clinica.R;
 import com.example.clinica.Views.Adapter.PacienteIndexAdapter;
-
+import com.example.clinica.Views.Adapter.PersonalIndexAdapter;
 
 
 import java.util.ArrayList;
@@ -27,11 +32,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class IndexPacienteActivity extends AppCompatActivity {
 
     @BindView(R.id.acRvPaciente)
-    RecyclerView recyclerView;
+    RecyclerView pacienteRecycler;
 
     @BindView(R.id.acEtBuscarPaciente)
     EditText buscador;
@@ -39,10 +47,11 @@ public class IndexPacienteActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     Boolean bNuevo = true , bModificado = false ;
     //objeto para la personalizacion del item del recycler
-    PacienteIndexAdapter adaptador;
+    PacienteIndexAdapter adapter;
 
     //lista de objetos
-    List<Paciente> listaPaciente = new ArrayList<>();
+    private List<Paciente> listaPaciente;
+    private ProgressBar pbCarga;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,23 +63,8 @@ public class IndexPacienteActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         layoutManager = new LinearLayoutManager(getApplicationContext());
-        cargarLista();
-        buscador.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                cargarLista();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
+        pbCarga = findViewById(R.id.pbCarga);
+        cargarRecycler();
     }
     @OnClick(R.id.acFabNuevoPaciente)
     public void clickNuevoPaciente(){
@@ -78,28 +72,35 @@ public class IndexPacienteActivity extends AppCompatActivity {
     }
 
 
-    private void cargarLista() {
-        //Select.seleccionarPaciente(getApplicationContext(), listaPaciente, buscador.getText().toString());
-        cargarRecycler(listaPaciente);
-    }
 
-    private void cargarRecycler(List<Paciente> listaPaciente) {
 
-        adaptador = new PacienteIndexAdapter(listaPaciente, new PacienteIndexAdapter.OnItemClickListener(){
+    private void cargarRecycler(){
+        Call<List<Paciente>> callPacientes = Api.getApi().getPacientes();
+        callPacientes.enqueue(new Callback<List<Paciente>>() {
             @Override
-            public void onItemClick(Paciente paciente, int position) {
-                irActivity(false, paciente);
+            public void onResponse(Call<List<Paciente>> call, Response<List<Paciente>> response) {
+                Log.d("acaes",response.body()+"");
+                listaPaciente = response.body();
+                pbCarga.setVisibility(View.GONE);
+                adapter = new PacienteIndexAdapter(listaPaciente, new PacienteIndexAdapter.OnItemClickListener(){
+                    @Override
+                    public void onItemClick(Paciente paciente, int position) {
+                        irActivity(false, paciente);
+                    }
+                });
+                pacienteRecycler.setHasFixedSize(true);
+                pacienteRecycler.setItemAnimator(new DefaultItemAnimator());
+                pacienteRecycler.setLayoutManager(layoutManager);
+                pacienteRecycler.setAdapter(adapter);
+
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<Paciente>> call, Throwable t) {
+
             }
         });
-
-        recyclerView.setHasFixedSize(true);
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        recyclerView.setLayoutManager(layoutManager);
-
-        recyclerView.setAdapter(adaptador);
-
     }
 
     private void irActivity(boolean bNuevo, Paciente paciente) {
@@ -114,7 +115,7 @@ public class IndexPacienteActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK){
-            cargarLista();
+            cargarRecycler();
         }
     }
     public boolean onOptionsItemSelected(MenuItem item) {
