@@ -68,8 +68,8 @@ public class PrincipalActivity extends AppCompatActivity
         TextView tvNombre = header.findViewById(R.id.tvNombre);
         TextView tvEmail = header.findViewById(R.id.tvEmail);
 
-        tvNombre.setText(prefs.getUsuario().getPer_nombre());
-        tvEmail.setText(prefs.getUsuario().getPer_nombre());
+        tvNombre.setText(prefs.getUsuario().getPer_nombre()+" "+prefs.getUsuario().getPer_apellido());
+        tvEmail.setText(prefs.getUsuario().getPer_username()+"-"+prefs.getUsuario().getPer_tipo());
         //pbCarga = findViewById(R.id.pbCarga);
 
         //getCursos();

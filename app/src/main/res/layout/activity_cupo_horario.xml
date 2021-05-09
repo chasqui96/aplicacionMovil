@@ -11,26 +11,25 @@
     <android.support.v7.widget.CardView
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="627dp"
         android:layout_margin="5dp"
         android:layout_marginTop="10dp"
-        app:cardUseCompatPadding="true"
-        app:cardElevation="10dp"
         app:cardCornerRadius="5dp"
-        >
+        app:cardElevation="10dp"
+        app:cardUseCompatPadding="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/acEtFecha"
@@ -45,12 +44,11 @@
                         android:padding="10dp" />
 
 
-
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <Spinner
                         android:id="@+id/acEtDia"
@@ -80,8 +78,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <Spinner
                         android:id="@+id/acEtDoctor"
@@ -96,24 +93,24 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    >
+                    android:layout_height="wrap_content">
 
                     <EditText
                         android:id="@+id/acEtDesde"
                         android:layout_width="170dp"
                         android:layout_height="match_parent"
+                        android:layout_centerHorizontal="true"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="5dp"
+                        android:layout_weight="1"
                         android:background="@drawable/campo_redondeado"
                         android:hint="H. Desde"
-                        android:timePickerMode="spinner"
-                        android:layout_weight="1"
-                        android:layout_centerHorizontal="true"
-                        android:padding="5dp" />
+                        android:padding="5dp"
+                        android:timePickerMode="spinner" />
 
 
                     <EditText
@@ -137,10 +134,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    app:cardUseCompatPadding="true"
-                    app:cardElevation="10dp"
                     app:cardCornerRadius="5dp"
-                    >
+                    app:cardElevation="10dp"
+                    app:cardUseCompatPadding="true">
 
                     <LinearLayout
                         android:layout_width="328dp"
@@ -150,11 +146,11 @@
 
 
                         <de.hdodenhof.circleimageview.CircleImageView
-                            android:layout_margin="10dp"
-                            android:src="@drawable/list"
                             android:id="@+id/rivCivImagen"
                             android:layout_width="70dp"
-                            android:layout_height="70dp" />
+                            android:layout_height="70dp"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/list" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -163,58 +159,29 @@
 
 
                             <LinearLayout
-                                android:weightSum="1"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:weightSum="1">
 
                                 <TextView
                                     android:id="@+id/etEspecialidad"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="174dp"
+                                    android:layout_height="match_parent"
                                     android:layout_weight="0.9"
                                     android:text="@string/nombre_especialidad"
                                     android:textSize="20sp" />
-                                <EditText
-                                    android:id="@+id/IdEspecialidad"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="" />
-                                <EditText
-                                    android:id="@+id/IdPersonal"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="" />
 
                             </LinearLayout>
+
                             <LinearLayout
-                                android:layout_weight="1"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
 
-                                <TextView
-                                    android:layout_width="121dp"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:text="@string/cantidad" />
-
-
-
-                            </LinearLayout>
                             <LinearLayout
-                                android:layout_weight="1"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <EditText
-                                    android:id="@+id/etCantidad"
-                                    android:layout_width="121dp"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:inputType="number"
-                                    android:text="@string/cantidad_item" />
-
-
-                            </LinearLayout>
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
 
 
                         </LinearLayout>
@@ -223,20 +190,19 @@
                     </LinearLayout>
 
 
-
                 </android.support.v7.widget.CardView>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:paddingTop="20dp"
                     android:paddingLeft="20dp"
+                    android:paddingTop="20dp"
                     android:paddingRight="20dp">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
 
                     <Button
                         android:id="@+id/acFabCupo"
@@ -258,11 +224,6 @@
             </LinearLayout>
 
 
-
-
-
-
         </RelativeLayout>
-    </android.support.v7.widget.CardView
-        >
+    </android.support.v7.widget.CardView>
 </LinearLayout>

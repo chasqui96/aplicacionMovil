@@ -4,8 +4,13 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f15dff2fe1d50c9d4ca71054b1a0b7ae/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f15dff2fe1d50c9d4ca71054b1a0b7ae/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f15dff2fe1d50c9d4ca71054b1a0b7ae/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36e50a1198c697d22abc91e8cc17721b/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36e50a1198c697d22abc91e8cc17721b/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/36e50a1198c697d22abc91e8cc17721b/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support.test/monitor/1.0.2/5764301056100b445e9ba31df7d1b554a55450f6/monitor-1.0.2-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

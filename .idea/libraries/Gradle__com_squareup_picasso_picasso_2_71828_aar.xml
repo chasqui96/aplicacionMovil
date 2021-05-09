@@ -4,8 +4,13 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f4c771ba5d8498a72a5de3a48f007c4d/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f4c771ba5d8498a72a5de3a48f007c4d/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f4c771ba5d8498a72a5de3a48f007c4d/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9982b491cb855d1544a62246d64b7e8/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9982b491cb855d1544a62246d64b7e8/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e9982b491cb855d1544a62246d64b7e8/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.picasso/picasso/2.71828/41874e20a4d17fd4ad2052ac217073e14d00c910/picasso-2.71828-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

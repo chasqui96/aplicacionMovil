@@ -12,6 +12,9 @@ public class SessionPreferences {
     //Constantes sesión
     private static final String PREF_NOMBRE = "PREF_NAME";
     private static final String PREF_ID = "PREF_ID";
+    private static final String PREF_USER_NAME = "PREF_USER_NAME";
+    private static final String PREF_APELLIDO = "PREF_APELLIDO";
+    private static final String PREF_TIPO = "PREF_TIPO";
     private static final String PREF_CI = "PREF_CI";
     private static final String PREF_SESSION = "PREF_SESSION";
 
@@ -42,6 +45,9 @@ public class SessionPreferences {
     public void guardarUsuario(Personal personal){
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(PREF_NOMBRE, personal.getPer_nombre());
+        editor.putString(PREF_APELLIDO, personal.getPer_apellido());
+        editor.putString(PREF_USER_NAME, personal.getPer_username());
+        editor.putString(PREF_TIPO, personal.getPer_tipo());
         editor.putInt(PREF_ID, personal.getPer_id());
         editor.putString(PREF_CI, personal.getPer_ci());
         editor.putBoolean(PREF_SESSION,true);
@@ -62,6 +68,9 @@ public class SessionPreferences {
     public Personal getUsuario(){
         Personal _objPersonal = new Personal();
         _objPersonal.setPer_nombre(prefs.getString(PREF_NOMBRE,""));
+        _objPersonal.setPer_apellido(prefs.getString(PREF_APELLIDO,""));
+        _objPersonal.setPer_username(prefs.getString(PREF_USER_NAME,""));
+        _objPersonal.setPer_tipo(prefs.getString(PREF_TIPO,""));
         _objPersonal.setPer_ci(prefs.getString(PREF_CI,""));
         _objPersonal.setPer_id(prefs.getInt(PREF_ID,0));
 
